@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js">
+</script>
+<script>
+
+
+$("#link").click(function(){
+  var holdtext = $("#clipboard").innerText;
+  Copied = holdtext.createTextRange();
+  Copied.execCommand("Copy");
+});
+
+
+</script>
+</head>
+<body>
+
+<hr>
+<a href="http://www.w3schools.com" style="font-family:arial;color:black;font-size:25px;">Click here to copy the Code</a> <button onclick="copyToClipboard()">Copy Text</button>
+<hr>
+
+</body>
+</html>
