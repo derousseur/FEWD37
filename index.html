@@ -8,8 +8,7 @@
         font-family: Helvetica, sans-serif;
         color: #777;
         width: 80%;
-        margin-right: auto;
-        margin-left: auto;
+        margin: 0 auto;
       }
       a{
         color: #ccc;
@@ -27,6 +26,33 @@
         border-radius: 50%;
         margin: 0 auto;
       }
+      td {
+        border: solid 1px black;
+        padding: 10px;
+      }
+      .first-name-cell{
+        background-color: #eee;
+        font-weight: bold;
+        text-align: center;
+      }
+      .button {
+        background-color: black;
+        color: white;
+        text-decoration: none;
+        font-size: 16px;
+        font-weight: normal;
+        font-style: normal;
+        border: 1px;
+        border-radius: 10px;
+        padding: 0.625em;
+      }
+      .btn-danger{
+        background-color: rgb(164, 45, 101);
+      }
+      .btn-small{
+        font-size: 12px;
+      }
+
     </style>
   </head>
   <body>
@@ -47,9 +73,40 @@
   <ul>
     <li><a href="http://derousseur.github.io/FEWD37/homework1.html" target="_blank" type="link">Homework 1</a></li>
   </ul>
-
-  I prefer a work environment that is respectful and collaborative instead of competitive.<br><br>
-
+  <br><br>
+  <h3>Spreadsheet</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Role</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>1</td>
+        <td contenteditable class="first-name-cell">Avand</td>
+        <td contenteditable>Instructor</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td contenteditable class="first-name-cell">Sandi</td>
+        <td contenteditable>TA</td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td contenteditable class="first-name-cell">Diana</td>
+        <td contenteditable>Student</td>
+      </tr>
+    </tbody>
+  </table>
+  <br>
+  <a href="#" class="button">Click me</a>
+  <button type="button" name="button" class="button">Click me</button>
+  <input type="submit" value="Click me" class="button">
+  <a href="#" class="button btn-danger btn-small">Don't!!</a>
+  <br><br>
   <img src="img/morgiana-g.gif" height="200px">
 </p>
   </body>
