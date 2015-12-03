@@ -113,7 +113,8 @@
         event.preventDefault();
         // Your code for like goes here
         var likeCount = document.querySelector("span");
-        var countNum = parseInt("0",10);
+        var spanText = likeCount.textContent;
+        var countNum = parseInt(spanText,10);
         var count = countNum + 1;
         likeCount.textContent = count;
       }
