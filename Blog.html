@@ -117,6 +117,16 @@
         var countNum = parseInt(spanText,10);
         var count = countNum + 1;
         likeCount.textContent = count;
+        
+/*
+        A better answer is:
+        var likeCount = document.querySelector("span");
+        var count = parseInt(likeCount.textContent,10);
+        count = count + 1;
+        likeCount.textContent = count;
+*/
+        
+        
       }
 
       function comment(event) {
