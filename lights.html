@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>FEWD37 - Diana Galvis Description</title>
+    <style>
+	 li{
+		 display: inline-block;
+	 }
+     .lightcase{
+	     background-color: #e18c00;
+	     margin: 0 auto;
+	     padding: 50px;
+	     max-width: 200px;
+	     border: 1px solid #ff6700;
+	     border-radius: 25px;
+     }
+     .light{
+	     margin: 0 auto;
+	     width: 100px;
+	     height: 100px;
+	     border: 10px solid #190f00;
+	     border-bottom-width: thin;
+	     border-right-width: thin;
+	     border-left-width: thin;
+	     border-radius: 100%;
+	     padding: 20px;
+	     margin-top: 20px;
+	     background-color: #8e5800;
+     }
+     .red-light{
+	     background-color: red;
+     }
+     .yellow-light{
+	     background-color: yellow;
+     }
+     .green-light{
+	     background-color: green;
+     }
+     .btn{
+	     font-size: large;
+	     padding: 20px;
+	     border: solid 1px;
+	     border-radius: 5px;
+     }
+     .btn-red{
+	     background-color: red;
+     }
+     .btn-yellow{
+	     background-color: yellow;
+     }
+     .btn-green{
+	     background-color: green;
+     }
+
+
+    </style>
+  </head>
+  <body>
+	  <nav>
+		  <ul>
+			  <li><button class="btn btn-red">Stop</button></li>
+			  <li><button class="btn btn-yellow">Slow</button></li>
+			  <li><button class="btn btn-green">Go</button></li>
+<!-- 			  <li><button class="btn btn-caution">Caution</button></li> -->
+		  </ul>
+	  </nav>	  
+<div class="lightcase">
+	<div class="light red"></div>
+	<div class="light yellow"></div>
+	<div class="light green"></div>	
+</div>
+
+<script type="text/javascript">
+	var redBtn = document.querySelector(".btn-red");
+	var yellowBtn = document.querySelector(".btn-yellow");
+	var greenBtn = document.querySelector(".btn-green");
+// 	var cautionBtn = document.querySelector(".btn-caution");
+	
+	var redLight = document.querySelector(".red");
+	var yellowLight = document.querySelector(".yellow");
+	var greenLight = document.querySelector(".green");
+
+	
+	redBtn.addEventListener("click", stopLightOn);
+	yellowBtn.addEventListener("click", slowLightOn);
+	greenBtn.addEventListener("click", goLightOn);
+// 	cautionBtn.addEventListener("click", cautionLightOn);
+	
+	function stopLightOn(event){
+		event.preventDefault();
+		yellowLight.classList.remove("yellow-light");
+		greenLight.classList.remove("green-light");
+		redLight.classList.toggle("red-light");
+		
+	}
+	
+	function slowLightOn(event){
+		event.preventDefault();
+		redLight.classList.remove("red-light");
+		greenLight.classList.remove("green-light");
+		yellowLight.classList.toggle("yellow-light");
+	}
+	
+	function goLightOn(event){
+		event.preventDefault();
+		redLight.classList.remove("red-light");
+		yellowLight.classList.remove("yellow-light");
+		greenLight.classList.toggle("green-light");
+	}
+	
+	
+</script>
+
+  </body>
+</html>
