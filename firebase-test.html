@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Firebase test</title>
+    <script src="https://cdn.firebase.com/js/client/2.2.1/firebase.js"></script>
+	<style>
+		body {
+			background-color: rgb(233,245,253);
+			margin: auto;
+			font-family: 'Helvetica', sans-serif;
+		}
+		.container{
+			margin: auto;
+		}
+		form{
+			margin: auto;
+			width: 100%;
+			position: fixed;
+			bottom: 0px;
+			background-color: rgb(103,107,111);
+			padding: 2%;
+		}
+		input{
+			background-color: white;
+			font-size: 1.5em;
+			color: #2c2c2c;
+			width: 89%;
+			height: 50px;
+			border: 1px solid #474747;
+			border-radius: 5px;
+			box-shadow: inset 0 0 1px #737373;
+		}
+		button{
+			background-color: rgb(0,171,210);
+			color: white;
+			font-size: 1.5em;
+			font-weight: bold;
+			border: 1px solid rgb(0,90,118);
+			border-radius: 5px;
+			min-width: 6%;
+			min-height: 50px;
+		}
+		#no-messages{
+			color: rgb(165,175,185);
+			padding: 20px;
+			text-align: center;
+		}
+		ul {
+			list-style: none;
+			margin-right: 20px;
+			margin-left: -20px;
+			margin-bottom: 100px;
+		}
+		#messages{
+			margin-bottom: 100px;
+		}
+		.message{
+			background-color: white;
+			border: transparent;
+			border-radius: 10px;
+			position: relative;
+			padding: 20px;
+			color: #2c2c2c;
+			text-align: left;
+			font-size: 1.5em;
+			max-width: 100%;
+			margin-bottom: 50px;
+		}
+		.message::after {
+			content: "";
+			width: 0px;
+			height: 20px;
+			border: 10px solid transparent;
+			 border-bottom-color: transparent; 
+			 border-left-color: transparent;
+			 border-right-color: transparent;
+			 border-top-color: white;
+			 position: absolute;
+			 top: 100%;
+			 left: 2%;
+ 
+			}
+		.user {
+			font-size: small;
+			position: absolute;
+			top:100%;
+		}
+		.time {
+			color: rgb(165,175,185);
+			font-size: small;
+			position: absolute;
+			top:100%;
+			right:0%;
+		}
+		.hidden{
+			display: none;
+		}
+	</style>	
+    
+  </head>
+  <body>
+	  <div class="container">
+	  	<ul id="#messages">
+<!--
+		  	<li><div class="message">hey<p class="user">Diana</p><p class="time">Fri 11:00pm</p><div></li>
+		  	<li class="message">hey<p class="user">Diana</p><p class="time">Fri 11:00pm</p></li>	
+	
+-->
+	  	</ul>
+	  	<div id="no-messages">
+		  	No messages
+	  	</div>
+	  	<form id="new-message-form">
+		  	<input id="new-message-input" type="text"></input>
+		  	<button type="submit">Send</button>
+		</form>
+	  </div>
+  <script type="text/javascript">
+	  var form = document.querySelector("#new-message-form");
+	  var input = document.querySelector("#new-message-input");
+	  var messagesList = document.querySelector("ul");
+	  var firebase = new Firebase("https://blinding-inferno-7422.firebaseio.com");		  
+	  var noMessage = document.querySelector("#no-messages");
+	  
+	  var username = localStorage.getItem("username");
+	
+		  // The first time through, this var will be null because localStorage is empty
+		  if (username == null) {
+		  // Load the variables value from the results of prompt
+	// 	  localStorage.clear();
+		  username = prompt("what is your username?");
+	
+		  // Save it for future use in localStorage
+		  localStorage.setItem("username", username);
+			}
+
+	  
+	  form.addEventListener("submit", addMessage);
+
+	  function addMessage(event) {
+		  event.preventDefault();
+
+		  noMessage.classList.add("hidden");
+		  
+		  firebase.push(
+			  {
+				  username: username,
+				  messageBody: input.value,
+				  createdAt: (new Date()).getTime()
+			  }
+		  );
+		  
+		  
+			form.reset();
+	}
+	  	
+	  
+	  	firebase.on('child_added', function (snapshot) {
+		  var data = snapshot.val();
+		  
+		  
+		var li = document.createElement("li");
+		var messageBubble = document.createElement("div");
+		var name = document.createElement("p");
+	// 	  var time = document.createElement("p");
+		  
+		  messageBubble.classList.add("message");
+		  messageBubble.textContent = data.messageBody;
+		  name.classList.add("user");
+		  name.textContent = data.username;
+	
+		  li.appendChild(messageBubble);
+		  messageBubble.appendChild(name);
+		  messagesList.insertBefore(li, messagesList.firstChild);
+		  console.log(data);
+		  })
+		  
+  </script>
+  </body>
+</html>

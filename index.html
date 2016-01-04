@@ -7,8 +7,10 @@
       body{
         font-family: Helvetica, sans-serif;
         color: #777;
-        width: 80%;
-        margin: 0 auto;
+        margin: auto;
+      }
+      .container{
+	      margin:0 25%;
       }
       a{
         color: #ccc;
@@ -20,11 +22,46 @@
         font-size: 4em;
       }
       p{
-        max-width: 600px;
+        padding: 20px;
       }
-      im{
+      .text-bubble{
+	      background-color: #c3c3c3;
+	      color: white;
+	      width: 30%;
+	      position: relative;
+	      border-radius: 15px; 
+	      z-index: -2;
+	      padding: 10px;
+	      margin: 0;
+	      float: left;
+      }
+      .text-bubble::after {
+		 content: "";
+		 width: 0px;
+         height: 1px;
+         border: 25px solid transparent;
+		 border-bottom-color: transparent; 
+		 border-left-color: transparent;
+		 border-top-color: transparent;
+		 border-left-color: #c3c3c3;
+		 position: absolute;
+		 top: 10%;
+		 left: 100%;
+		 }
+	  .intro{
+		  float: left;
+	  }
+      .intro img{
+        padding: 20px;
+        height: 250px;
+      }
+      img{
         border-radius: 50%;
-        margin: 0 auto;
+        }
+      .tables{
+	      float: right;
+	      width: 100%;
+	      margin-top: 50px;
       }
       td {
         border: solid 1px black;
@@ -52,24 +89,42 @@
       .btn-small{
         font-size: 12px;
       }
+      
+      @media(max-width:650px){
+	    .container{
+	      margin: 0 10%;
+      }
+	    .intro{
+		  float: left;
+	  }
+	    .intro img{
+        border-radius: 50%;
+        padding: 20px;
+        height: 150px;
+      }
+      }
 
     </style>
   </head>
   <body>
+  <div class="container">
     <h1><a href="http://derousseur.github.io/uxportfolio/" target="_blank" type="link">Diana Galvis</a></h1>
-    <img src="http://derousseur.github.io/FEWD37/img/at-bernal-heights-hill.JPG" height="200px">
-    <p>Hi! I'm a User Experience designer and researcher looking for new opportunities. <br> I focus on user research, information architecture, interaction design and visual information design.<br><br>
-
-  I'm empathetic, analytical and strategic. INTP.<br><br>
-
-  In my free time I:
-  <ul>
-    <li> Read</li>
-    <li> Watch Sci-fi/Fantasy movies</li>
-    <li> Go Hiking</li>
-    <li> Attend concerts</li>
-  </ul>
-  <br><br>
+    <div class="text-bubble">
+	    <p>Hi! I'm a User Experience designer.<br>I'm empathetic, analytical and strategic. INTP. <br>In my free time I:<br>
+		  <ul>
+		    <li> Read</li>
+		    <li> Watch Sci-fi/Fantasy movies</li>
+		    <li> Go Hiking</li>
+		    <li> Attend concerts</li>
+		  </ul>
+		 </p>
+	</div>
+    
+    <div class="intro">
+	<img src="http://derousseur.github.io/FEWD37/img/at-bernal-heights-hill.JPG">
+    </div>
+    
+  <div class="tables">
   <h3>HOMEWORKS</h3>
   <table>
     <thead>
@@ -104,6 +159,26 @@
         <td>4</td>
         <td class="link-cell"><a href="http://derousseur.github.io/FEWD37/lights.html" target="_blank" type="link">Traffic Lights</a></td>
         <td contenteditable>Control lights with buttons</td>
+      </tr>
+      <tr>
+        <td>5</td>
+        <td class="link-cell"><a href="http://derousseur.github.io/FEWD37/movie-search.html" target="_blank" type="link">Movie Search</a></td>
+        <td contenteditable>Form + API SearchResults</td>
+      </tr>
+      <tr>
+        <td>6</td>
+        <td class="link-cell"><a href="http://derousseur.github.io/FEWD37/todo-list-csv.html" target="_blank" type="link">To Do List Split</a></td>
+        <td contenteditable>Split comma separated inputs</td>
+      </tr>
+      <tr>
+        <td>7</td>
+        <td class="link-cell"><a href="#" target="_blank" type="link">Spreadsheet</a></td>
+        <td contenteditable>Add columns - not done yet</td>
+      </tr>
+      <tr>
+        <td>8</td>
+        <td class="link-cell"><a href="http://derousseur.github.io/FEWD37/firebase-test.html" target="_blank" type="link">Chat</a></td>
+        <td contenteditable>Use of firebase data base, local storage</td>
       </tr>
 
     </tbody>
@@ -147,6 +222,7 @@
 
     </tbody>
   </table>
+  </div>
   <br><br><br>
   <!--
 <a href="#" class="button">Click me</a>
@@ -154,8 +230,6 @@
   <input type="submit" value="Click me" class="button">
   <a href="#" class="button btn-danger btn-small">Don't!!</a>
 -->
-  <br><br>
-  <img src="img/morgiana-g.gif" class="img-round" height="200px">
-</p>
+  </container>
   </body>
 </html>
