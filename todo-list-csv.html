@@ -27,7 +27,7 @@ form.addEventListener("submit", addTodo);
 function addTodo(event) {
   event.preventDefault();
   
-  var items = input.value.split(",");
+  var items = input.value.split(", ");
   
   for (var i = 0; i < items.length; i++) {
   var li = document.createElement("li");
