@@ -27,21 +27,23 @@ function resultsReceived(results) {
   // The array of movies lives inside results["Search"]
   var searchResults = results["Search"];
     // See the sampleResult above for an example
-  for (var i = 0; i < searchResults.lenght; i++) {
+  for (var i = 0; i < searchResults.length; i++) {
+	var movie = searchResults[i];
   	var li = document.createElement("li");
   	var div1 = document.createElement("div");
   	var link = document.createElement("a");
   	var div2 = document.createElement("div");
-  	var year = searchResults[i]["Year"];
-  	var title = searchResults[i]["Title"];
+  	var year = movie["Year"];
+  	var title = movie["Title"];
+  	var imdb = "http://www.imdb.com/title/" + movie["imdbID"];
   	
   	li.classList.add("movie");
-  	a.setAttribute("url", "http://www.imdb.com/title/" + searchResults[i]["imdbID"]);
-  	a.setAttribute("target", "_blank");
+  	link.setAttribute("url", imdb);
+  	link.setAttribute("target", "_blank");
 	div1.classList.add("movie-title");
 	div1.textContent = title;
 	div2.classList.add("movie-release-date");
-	div2.textContent = searchResults[i]["Year"];
+	div2.textContent = year;
 
 		
 	div1.appendChild(link);
