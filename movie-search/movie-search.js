@@ -20,13 +20,14 @@ function formSubmitted(event) {
   $.get(url, resultsReceived);
 }
 
+var ul = document.querySelector("ul");
+
 function resultsReceived(results) {
   // Try putting a debugger here and inspecting the results argument
   // The array of movies lives inside results["Search"]
   var searchResults = results["Search"];
     // See the sampleResult above for an example
   for (var i = 0; i < searchResults.lenght; i++) {
-	var ul = document.querySelector("ul");
   	var li = document.createElement("li");
   	var div1 = document.createElement("div");
   	var link = document.createElement("a");
@@ -34,12 +35,14 @@ function resultsReceived(results) {
   	var year = searchResults[i]["Year"];
   	var title = searchResults[i]["Title"];
   	
+  	li.classList.add("movie");
   	a.setAttribute("url", "http://www.imdb.com/title/" + searchResults[i]["imdbID"]);
   	a.setAttribute("target", "_blank");
-	div1.textContent = title;
 	div1.classList.add("movie-title");
-	div2.textContent = searchResults[i]["Year"];
+	div1.textContent = title;
 	div2.classList.add("movie-release-date");
+	div2.textContent = searchResults[i]["Year"];
+
 		
 	div1.appendChild(link);
 	li.appendChild(div1);
