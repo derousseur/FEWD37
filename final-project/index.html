@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Love Diary</title>
+    <script src="https://cdn.firebase.com/js/client/2.2.1/firebase.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+	<script src="js/jquery.min.js"></script>
+	<link rel="stylesheet" href="css/animate.css">
+	<style>
+		body {
+			background-color: #ffd5d0;
+			margin: auto;
+			font-family: 'Open Sans', sans-serif;
+			font-size: 0.8em;
+			color: #2c2c2c;
+
+		}
+		.container{
+			margin: auto;
+		}
+		.centered{
+			text-align: center;
+		}
+		
+/* 		title */
+		h1{
+			font-family: 'Amatic', sans-serif;
+			font-size: 6em;
+			line-height: 0.3em;
+			color: black;
+		}
+		h2{
+			font-family: 'Amatic', sans-serif;
+			font-size: 3.6em;
+			line-height: 0.3em;
+			color: black;
+			margin-top: 50px;
+			animation: slideInRight 1s;
+		}
+		.d1{
+			animation: flipInX 1s;
+		}
+		.d2{
+			animation: slideInLeft 1s;
+		}
+		
+		.larger-size{
+			font-size: 25em;
+			text-align: center;
+		}
+		.large{
+			font-size: 18em;
+			text-align: center;
+		}
+		.red{
+			transition: 0.5s cubic-bezier(0.95,0.005,0.075,0.035);
+			color: #ab1224;
+		}
+		.black{
+			transition: 0.5s cubic-bezier(0.95,0.005,0.075,0.035);
+			color: #000;
+		}
+		.fa-heartbeat{
+			transition: 0.5s cubic-bezier(0.95,0.005,0.075,0.035);
+		}
+		.fa-heart{
+			animation: pulse 2s infinite;
+		}
+		.image{
+			animation: flipInX 2s;
+			
+		}
+		strong{
+			font-size: 1.4em;
+		}
+		a{
+			color: #c00f0f;
+		}
+		a:hover{
+			color: white;
+			box-shadow: none;
+		}
+		.btn{
+			text-decoration: none;
+			background-color: #737373;
+			border: solid 2px #737373;
+			border-radius: 5px;
+			box-shadow: 1px 1px 3px #737373;
+			color: white;
+			font-size: 1.7em;
+			padding: 10px;
+		}
+		.mar-top{
+			margin-top: 50px;
+		}
+			</style>		
+  </head>
+  <body>
+	  <div class="container">
+		<div class="centered">  
+		<h1 class="d1 centered ">How's your heart?</h1>
+		<i class="fa larger-size fa-heart red"></i>
+		</div>
+		<div class="centered"> 
+		<h2 class="d2 centered">Keep track of your relationship with <strong><a href="final-heartdiary.html">love diary</a>
+		</strong></h2><br><br>
+		<h2 class="centered">Add a heart each day</h2>	
+		<img class="image" src="img/img-switch.png">
+		<img class="image" src="img/img-daily.png">	
+		<h2 class="centered">Compare how many times you felt good vs bad</h2>
+		<img class="image" src="img/img-compare.png">
+		<h2 class="centered">Then dedicate a song expressing your feelings</h2>
+		<img class="image" src="img/img-results.png">
+		</div>
+		<div class="centered mar-top">
+			<a href="final-heartdiary.html" class="btn" role="button" target="_blank">Try Love Diary</a><br>
+		</div>
+		
+	  </div>
+  </body>

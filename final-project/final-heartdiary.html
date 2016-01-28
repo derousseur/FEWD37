@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Love Diary</title>
+    <script src="https://cdn.firebase.com/js/client/2.2.1/firebase.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+	<script src="js/jquery.min.js"></script>
+	<style>
+		@import url(https://fonts.googleapis.com/css?family=Amatic+SC);
+		/*
+@import url(https://fonts.googleapis.com/css?family=Lato); 
+		@import url(https://fonts.googleapis.com/css?family=Open+Sans);
+*/
+		@import url(https://fonts.googleapis.com/css?family=Merriweather:400,300);
+		
+		body {
+			background-color: #ffd5d0;
+			margin: auto;
+			font-family: 'Merriweather', serif;
+			font-size: 0.8em;
+			color: #2c2c2c;
+
+		}
+		.container{
+			margin: auto;
+		}
+		.centered{
+			text-align: center;
+		}
+		
+/* 		title */
+		h1{
+			font-family: 'Amatic', sans-serif;
+			font-size: 6em;
+			line-height: 0.3em;
+			color: black;
+		}
+		h2{
+			font-family: 'Amatic', sans-serif;
+			font-size: 3.6em;
+			line-height: 0.3em;
+			color: black;
+		}
+		
+		#add-heart-form{
+			margin-left: 45%;
+			width: 10%;
+			text-align: center;
+		}
+		
+		
+		.larger-size{
+			font-size: 25em;
+			text-align: center;
+		}
+		.large{
+			font-size: 18em;
+			text-align: center;
+		}
+		.red{
+			transition: 0.5s cubic-bezier(0.95,0.005,0.075,0.035);
+			color: #ab1224;
+		}
+		.black{
+			transition: 0.5s cubic-bezier(0.95,0.005,0.075,0.035);
+			color: #000;
+		}
+		.fa-heartbeat{
+			transition: 0.5s cubic-bezier(0.95,0.005,0.075,0.035);
+		}
+		.fa-heart{
+			transition: 0.5s cubic-bezier(0.95,0.005,0.075,0.035);
+		}
+		
+		label {
+			cursor: pointer;
+		}
+  		.switch{
+	  		margin-left: 35px;
+  		}
+  		.switch-control{
+	  		transition: 0.3s cubic-bezier(0.95,0.005,0.075,0.035);
+	  		width: 8em;
+	  		height: 4em;
+	  		display: block;
+	  		border: 2px solid #c3c3c3;
+	  		border-radius: 4em;
+	  		background-color: #eeeeee;
+	  		position: relative;
+  		}
+  		.switch-control:after{
+	  		transition: 0.3s cubic-bezier(0.95,0.005,0.075,0.035);
+	  		content: "";
+	  		width: 4em;
+	  		height: 4em;
+	  		display: block;
+	  		background-color: white;
+	  		border-radius: 50%;
+	  		box-shadow: 1px 0 2px #c3c3c3, 0 1px 2px #c3c3c3;
+	  		position: absolute;
+	  		top: 0;
+	  		left: 0;
+  		}
+  		.switch-input{
+	  		display: none;
+  		}
+  		.switch-input:checked + .switch-control {
+	  		background-color: #ab1224;
+  		}
+  		.switch-input:checked + .switch-control:after{
+	  		left: 4em;
+  		}
+		
+		
+		form button {
+			margin-top: 20px;
+			background-color: #737373;
+			border: solid 2px transparent;
+			border-radius: 5px;
+			box-shadow: 1px 1px 3px #737373;
+			color: white;
+			font-size: 1.7em;
+			padding: 10px;
+		}
+		button{
+			margin-top: 10px;
+			background-color: #737373;
+			border: solid 2px transparent;
+			border-radius: 5px;
+			box-shadow: 1px 1px 3px #737373;
+			color: white;
+			font-size: 1.2em;
+			padding: 10px;
+		}
+		
+		.data-display{
+			margin: 20px 0 0 0;
+			background-color: #f4e8e8;
+			padding: 20px;
+			overflow: hidden;
+			border-bottom: 2px dotted #fff;
+		}
+		.arrow{
+			text-align: center;
+		}
+		
+
+		
+		ul{
+			list-style: none;
+		}
+		li{
+			display: inline-block;
+		}
+		li p{
+			font-size: 0.6em;
+		}
+		li div{
+			border: 2px dotted #fff;
+			background-color: rgba(255,255,255, 0.5);
+			padding: 10px;
+			margin: 5px;
+		}
+		#uuuh{
+			color:#2c2c2c;
+		}
+				
+		.bad-div {
+			margin-left: 1%;
+			padding: 0;
+			width: 48%;
+			max-width: 48%;
+			float: left;
+/* 			border: 2px dashed #fff; */
+		}
+		.good-div{
+			margin-left: 1%;
+			width: 48%;
+			max-width: 48%;
+			float: left;
+/* 			border: 2px dashed #fff; */
+		}
+		.compare-results{
+			padding: 50px;
+			background-color: #f4e8e8;
+		}
+		.results{
+			font-size: 1.2em;
+			text-align: center;
+			font-weight: 300;
+		}
+		.hidden{
+			display: none;
+		}
+		
+	</style>	
+		
+  </head>
+  <body>
+	  <div class="container">
+		<h1 class="centered">Love Diary</h1>
+		<div id="heartdiv" class="centered">
+		  	<i class="fa larger-size fa-heart red"></i>		  	
+	  	</div>
+
+	  	<form id="add-heart-form" class="centered">
+			  	<label class="switch">
+				  		<input class="switch-input" type="checkbox" checked>
+				  		<div class="switch-control"></div>
+			  	</label><br>
+			  	<button type="submit">Add</button>
+		</form>
+		
+		<div class="data-display">
+			<div class="arrow">
+				<h2>Daily Heartbeats</h2><button class="compare-btn" type="button">Compare <i class="fa fa-heart red"></i> & <i class="fa fa-heartbeat black"></i></button>
+			</div>
+			<div>
+				<ul id="uuuh">
+<!-- 					<li class=""><div class="centered"><i class="fa fa-heartbeat fa-5x black"></i><p>Sun Jan 24 2016</p></div></li> -->		
+<!-- 					<li class=""><div class="centered"><i class="fa fa-heart fa-5x red"></i><p>Mon Jan 25 2016</p></div></li> -->			
+				</ul>
+			</div>
+			<div class="good-div">
+				<ul id="good">
+<!-- 					<li class=""><div class="centered"><i class="fa fa-heart fa-5x red"></i><p>Sun Jan 24 2016</p></div></li> -->
+					
+				</ul>
+			</div>
+			<div class="bad-div">
+				<ul id="bad">
+<!-- 					<li class=""><div class="centered"><i class="fa fa-heartbeat fa-5x black"></i><p>Sun Jan 24 2016</p></div></li> -->
+					
+				</ul>
+			</div>
+		</div>
+			
+			<div class="compare-results centered">
+			</div>
+			
+		
+		
+	  </div>
+  <script type="text/javascript">
+
+// 	  variables for switch
+	  	var form = document.querySelector("#add-heart-form");
+	  	var toggle = document.querySelector(".switch");
+	  	var heartIcon = document.querySelector(".fa");
+	  	var span = document.querySelector(".heart-text");
+	  	var checkbox = document.querySelector(".switch-input");
+	  	var compareBtn = document.querySelector(".compare-btn");
+	  	var dataDisplayDiv = document.querySelector(".data-display");
+// 	  	var movedObject;
+	  	
+//    variable for addHeart and compareFn
+		var ul = document.querySelector("#uuuh");
+	
+// 	  variables for pushing data to firebase
+	  
+		
+	  	var firebase = new Firebase("https://fiery-fire-4248.firebaseio.com");	
+	  
+	  	var journalData = {};
+	  	var now = new Date();
+	  
+	    var heartD;
+	    var dateD = now.toDateString();
+	  
+	  
+
+	  
+	  
+	  // event listeners include checking the heart that changes the classes of the icon and sets the variable heartD -heart data- to broken or full -- and addHeart to puch data and display it 
+	  
+	  	toggle.addEventListener("click", checkingHeart);
+	  	form.addEventListener("submit", addHeart);
+	   	compareBtn.addEventListener("click", compareFn);
+
+	  
+	  
+// 	 FUNCTIONS checkingHeart, addHeart making the object pusshing and displaying, comparing and showing results
+	  
+	  function checkingHeart(event){
+// 	  	 event.preventDefault();
+	  	 
+// 		if (checkbox.getAttribute('checked', 'checked') == true) {
+	  	if (checkbox.checked == true) {
+		  console.log("if");
+		  heartIcon.classList.remove("fa-heartbeat");
+		  heartIcon.classList.remove("black");
+		  heartIcon.classList.add("fa-heart");
+		  heartIcon.classList.add("red");
+		  heartD = "full";
+		  checkbox.removeAttribute('checked', 'checked');
+		  console.log(heartD);
+// 	  	} else if (checkbox.getAttribute('checked', 'checked') == false){
+		} else if (checkbox.checked == false){
+
+		  console.log("else");
+		  	
+		  heartIcon.classList.remove("fa-heart");
+		  heartIcon.classList.remove("red");
+		  heartIcon.classList.add("fa-heartbeat");
+		  heartIcon.classList.add("black");
+		  heartD = "broken";
+		  checkbox.setAttribute('checked', 'checked');
+		  console.log(heartD);
+	  	}
+	  	
+	  }
+	  
+	  
+	  
+	  //make the obeject with heartD value from switch
+	  	  
+	  journalData[dateD] = heartD;
+	
+	  localStorage.setItem("journal", JSON.stringify(journalData));
+	  
+	  console.log(journalData);
+			
+
+	  
+	  
+
+	  function addHeart(event) {
+		  event.preventDefault();	
+					  
+		  firebase.push(
+			  {
+				  date: new Date().toDateString(),
+				  heart: heartD
+			  }
+			  );
+		
+		/*
+movedObject = dataDisplayDiv;
+		move_up();
+*/
+		
+		}
+	  	
+	  
+	  firebase.on('child_added', function (snapshot) {
+	  var data = snapshot.val();
+  
+/* 		Display data: it shoukd look like this:
+		<ul id="#uuuh=">
+					<li class="bad-li"><div class="centered"><i class="fa fa-heartbeat fa-5x black"></i><p>Sun Jan 24 2016</p></div></li>  
+*/
+		// variables for creating list results
+  
+ 	
+		var li = document.createElement("li");
+		var journalEntries = document.createElement("div");
+		var icon = document.createElement("i");
+		var time = document.createElement("p");	
+		  
+		  
+		  journalEntries.appendChild(icon);
+
+		  	  if (data.heart == "broken") {
+			  icon.classList.add("fa");
+		  	  icon.classList.add("fa-heartbeat");
+		  	  icon.classList.add("fa-5x");
+			  icon.classList.add("black");
+			  li.classList.add("blackLi");
+		  
+
+			  } else {
+			  icon.classList.add("fa");
+			  icon.classList.add("fa-heart");
+			  icon.classList.add("fa-5x");
+			  icon.classList.add("red");
+			  li.classList.add("redLi");
+
+			  }
+			  
+		  time.textContent = data.date;
+		  journalEntries.appendChild(time);
+		  journalEntries.classList.add("centered");
+		  li.appendChild(journalEntries);
+		  ul.appendChild(li);
+
+		  console.log(data.date);
+		  })
+		  
+		  
+		  		 		  
+	  function compareFn(event){
+	  	  event.preventDefault();
+	  	  var badList = document.getElementById("bad");
+		  var goodList = document.getElementById("good"); 
+		  var allHearts = ul.getElementsByTagName("li");
+	  	  var blackHearts = document.querySelectorAll(".blackLi");
+	      var redHearts = document.querySelectorAll(".redLi");
+	      
+
+
+	      for (var i = 0; i < blackHearts.length; i++) {
+		      allBlackHearts = blackHearts[i];
+		      badList.appendChild(allBlackHearts);	
+		      }
+		  for (var i = 0; i < redHearts.length; i++) {
+		      allRedHearts = redHearts[i];
+		      goodList.appendChild(allRedHearts);	
+		      }
+		      
+/*
+			 	 <div class="compare-results centered">
+				
+					<i class="fa large fa-heart red"></i>
+					<p class="results">It looks you are happy in your relationship. <br>Dedicate your loved one this song <span class="song"></span></p>
+				
+					<i class="fa large fa-heartbeat black"></i>
+					<p class="results">It looks you are unhappy in your relationship. <br>Dedicate your loved one this song <span class="song"></span></p>
+				
+					<i class="fa large fa-heart red"></i><i class="fa large fa-heartbeat black"></i>
+					<p class="results">It looks you are ambivalent in your relationship. <br>Dedicate your loved one this song <span class="song"></span></p>
+				
+					</div>
+*/
+		  var compareDiv = document.querySelector(".compare-results");
+		  var h2 = document.createElement("h2");
+	      var iconR = document.createElement("i");
+	      var iconR2 = document.createElement("i");
+	      var resultsTxt = document.createElement("p");
+	      resultsTxt.classList.add("results");
+	      var video = document.createElement("iframe");
+	      var song;
+	      	      
+	     
+	      var loveSong = "https://www.youtube.com/embed/l36CW8MUc0Y";
+	      var sadSong = "https://www.youtube.com/embed/m6y5edkoHOg";
+	      var madSong = "https://www.youtube.com/embed/PK4DeMYtumc";
+
+		  if (blackHearts.length<redHearts.length) {
+			  iconR.classList.add("fa");
+		  	  iconR.classList.add("fa-heart");
+		  	  iconR.classList.add("large");
+			  iconR.classList.add("red");
+			  resultsTxt.textContent = "It looks you are happy in your relationship. Dedicate:";
+			  song = loveSong;
+			  
+			  
+
+		  } else if (blackHearts.length>redHearts.length) {
+			  iconR.classList.add("fa");
+		  	  iconR.classList.add("fa-heartbeat");
+		  	  iconR.classList.add("large");
+			  iconR.classList.add("black");
+			  resultsTxt.textContent = "It looks you are unhappy in your relationship. Dedicate:";
+			  song = sadSong;
+			  }
+			  
+			else if (blackHearts.length==redHearts.length) {
+			  iconR.classList.add("fa");
+		  	  iconR.classList.add("fa-heart");
+		  	  iconR.classList.add("large");
+			  iconR.classList.add("red");
+			  iconR2.classList.add("fa");
+		  	  iconR2.classList.add("fa-heartbeat");
+		  	  iconR2.classList.add("large");
+			  iconR2.classList.add("black");
+			  resultsTxt.textContent = "It looks you are unsure in your relationship. Dedicate:";	
+			  song = madSong;	
+			}
+			
+			  video.setAttribute("width", "420");
+			  video.setAttribute("height", "315");
+			  video.setAttribute("src", song);
+			  video.setAttribute("frameborder", "0");
+			  video.setAttribute("allowfullscreen", true);
+			  
+			  h2.textContent = "Results";
+			  
+			  compareDiv.appendChild(h2);
+			  compareDiv.appendChild(iconR);
+			  compareDiv.appendChild(iconR2);
+			  compareDiv.appendChild(resultsTxt);
+			  compareDiv.appendChild(video);
+			  
+			  /*
+movedObject = compareDiv;
+			  move_up();
+*/
+			  
+			  			  
+    	
+    	}
+    	
+
+    	
+    	/*
+function move_up() {
+			movedObject.scrollTop += 10;
+  		}
+*/
+    	
+		  
+  </script>
+  </body>
+</html>
