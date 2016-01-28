@@ -1,0 +1,22 @@
+<div id="ball"></div>
+<style>
+	#ball{
+		background-color: red;
+		height: 100px;
+		width:100px;
+		border-radius: 100%;
+		position: fixed;
+		top: 20%;
+		left: 20%;
+		animation: bounce 1s infinite alternate;
+	}
+
+	@keyframes bounce{
+		0% {
+			transform: translateY(0);
+			}
+		100% {
+			transform: translateY(-200px);
+			}
+	}
+</style>
